@@ -61,7 +61,35 @@ function App() {
         break;
     }
 
-    setResult(numberResult.toString());
+    switch (numberResult) {
+      case 13:
+        setResult("👆🏼🇻🇳🫏");
+        break;
+
+      case 17:
+        setResult("🇧🇷🐂🔫");
+        break;
+
+      case 22:
+        setResult("🇧🇷🐂🔫");
+        break;
+
+      case 24:
+        setResult("🦌🏳️‍🌈");
+        break;
+
+      case 69:
+        setResult("😏");
+        break;
+
+      case 666:
+        setResult("😈");
+        break;
+
+      default:
+        setResult(numberResult.toString());
+        break;
+    }
   }
 
   /**
@@ -122,13 +150,6 @@ function App() {
   /**
    * console.log(s)
    */
-  console.log("n1:", n1);
-  console.log("n2:", n2);
-  console.log("operator:", operator);
-  console.log("operatorIsClicked:", operatorIsClicked);
-  console.log("equalIsClicked:", equalIsClicked);
-  console.log("result:", result);
-  console.log("==========");
 
   return (
     <>
