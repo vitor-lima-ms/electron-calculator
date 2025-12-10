@@ -208,6 +208,17 @@ function App() {
             </Col>
 
             <Col>
+              <NumberButton
+                buttonNumber="0"
+                n1={n1}
+                n2={n2}
+                operatorIsClicked={operatorIsClicked}
+                setN1={setN1}
+                setN2={setN2}
+              />
+            </Col>
+
+            <Col>
               <ClearButton
                 equalIsClicked={equalIsClicked}
                 n1={n1}
