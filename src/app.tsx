@@ -1,3 +1,5 @@
+/* Bootstrap imports */
+import "bootstrap/dist/css/bootstrap.min.css";
 /* Component imports */
 import ClearButton from "./components/clear-button.component";
 import EqualButton from "./components/equal-button.component";
