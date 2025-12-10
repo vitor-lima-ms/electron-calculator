@@ -1,6 +1,6 @@
 {
   "name": "electron-calculator",
-  "productName": "electron-calculator",
+  "productName": "Bosque Calculator",
   "version": "1.0.0",
   "description": "An awsome calculator!",
   "main": ".webpack/main",
