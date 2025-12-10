@@ -1,3 +1,5 @@
+/* Component imports */
+import MainButton from "./main-button.component";
 /* Enum imports */
 import { OperatorsEnum } from "../enums/operators.enum";
 /* React imports */
@@ -19,11 +21,11 @@ export default function OperatorButton(props: ComponentProps) {
   };
 
   return (
-    <button
-      disabled={props.operatorIsClicked || !props.n1}
+    <MainButton
+      buttonText={props.operator}
+      fixedWidth
       onClick={updateOperatorAndOperatorIsClicked}
-    >
-      {props.operator}
-    </button>
+      variant="success"
+    />
   );
 }

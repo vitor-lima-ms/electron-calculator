@@ -1,3 +1,5 @@
+/* Component imports */
+import MainButton from "./main-button.component";
 /* Enum imports */
 import { OperatorsEnum } from "../enums/operators.enum";
 /* React imports */
@@ -33,5 +35,12 @@ export default function ClearButton(props: ComponentProps) {
     props.setResult("");
   };
 
-  return <button onClick={clearAllVariables}>Limpar</button>;
+  return (
+    <MainButton
+      buttonText="Limpar"
+      fixedWidth={false}
+      onClick={clearAllVariables}
+      variant="danger"
+    />
+  );
 }

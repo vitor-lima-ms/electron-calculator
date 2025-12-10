@@ -1,3 +1,5 @@
+/* Component imports */
+import MainButton from "./main-button.component";
 /* React imports */
 import { Dispatch, SetStateAction } from "react";
 
@@ -12,8 +14,17 @@ export default function EqualButton(props: ComponentProps) {
   const updateEqualIsClicked = () => props.setEqualIsClicked(true);
 
   if (props.result || !props.n2) {
-    return <button disabled>=</button>;
+    return (
+      <MainButton buttonText="=" disabled fixedWidth variant="secondary" />
+    );
   }
 
-  return <button onClick={updateEqualIsClicked}>=</button>;
+  return (
+    <MainButton
+      buttonText="="
+      fixedWidth
+      onClick={updateEqualIsClicked}
+      variant="secondary"
+    />
+  );
 }

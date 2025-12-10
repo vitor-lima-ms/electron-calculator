@@ -1,9 +1,13 @@
 /* Bootstrap imports */
 import "bootstrap/dist/css/bootstrap.min.css";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
 /* Component imports */
 import ClearButton from "./components/clear-button.component";
 import EqualButton from "./components/equal-button.component";
 import NumberButton from "./components/number-button.component";
+import NumberButtonsRow from "./components/number-buttons-row.component";
 import OperatorButton from "./components/operator-button.component";
 import Visor from "./components/visor.component";
 /* Enum imports */
@@ -11,8 +15,6 @@ import { OperatorsEnum } from "./enums/operators.enum";
 /* React imports */
 import { createRoot } from "react-dom/client";
 import { JSX, useState } from "react";
-
-const root = createRoot(document.getElementById("app"));
 
 function App() {
   /**
@@ -98,10 +100,10 @@ function App() {
    * Função para auxiliar a geração dos botões com os números da calculadora
    * @returns Lista com componentes NumberButton
    */
-  const generateNumberButtons = () => {
+  const generateNumberButtonsFrom1To9 = () => {
     const numberButtonsList: JSX.Element[] = [];
 
-    for (let n = 0; n < 10; n++) {
+    for (let n = 1; n < 10; n++) {
       numberButtonsList.push(
         <NumberButton
           buttonNumber={n.toString()}
@@ -117,7 +119,42 @@ function App() {
     return numberButtonsList;
   };
 
-  const numberButtonsList = generateNumberButtons();
+  const numberButtonsList = generateNumberButtonsFrom1To9();
+
+  /**
+   * Função para auxiliar a geração das linhas com botões numéricos da calculadora
+   * @returns Lista com componentes NumberButtonsRow
+   */
+  const generateNumberButtonsRows = () => {
+    const buttonsPerRow = 3;
+
+    const numberButtonsRowsList: JSX.Element[] = [];
+
+    let numberButtonsForOneRow: JSX.Element[] = [];
+
+    for (let i = 0; i <= numberButtonsList.length; i++) {
+      if (i !== 0 && i % buttonsPerRow === 0) {
+        numberButtonsRowsList.push(
+          <NumberButtonsRow
+            key={Math.random()}
+            numberButtons={numberButtonsForOneRow}
+          />
+        );
+
+        numberButtonsForOneRow = [numberButtonsList[i]];
+
+        continue;
+      }
+
+      const numberButton = numberButtonsList[i];
+
+      numberButtonsForOneRow.push(numberButton);
+    }
+
+    return numberButtonsRowsList;
+  };
+
+  const numberButtonsRowsList = generateNumberButtonsRows().reverse();
 
   /**
    * Função para auxiliar a geração dos botões com os operadores da calculadora
@@ -154,36 +191,49 @@ function App() {
    */
 
   return (
-    <>
+    <Container>
       <Visor n1={n1} n2={n2} operator={operator} result={result} />
-      {numberButtonsList.map((numberButton) => (
-        <li key={Math.random()}>{numberButton}</li>
-      ))}
-      {operatorButtonsList.map((operatorButton) => (
-        <li key={Math.random()}>{operatorButton}</li>
-      ))}
-      <EqualButton
-        equalIsClicked={equalIsClicked}
-        n2={n2}
-        result={result}
-        setEqualIsClicked={setEqualIsClicked}
-      />
-      <ClearButton
-        equalIsClicked={equalIsClicked}
-        n1={n1}
-        n2={n2}
-        operator={operator}
-        operatorIsClicked={operatorIsClicked}
-        result={result}
-        setEqualIsClicked={setEqualIsClicked}
-        setN1={setN1}
-        setN2={setN2}
-        setOperator={setOperator}
-        setOperatorIsClicked={setOperatorIsClicked}
-        setResult={setResult}
-      />
-    </>
+
+      <Row>
+        <Col>
+          {numberButtonsRowsList.map((numberButtonRow) => numberButtonRow)}
+          <Row style={{ margin: "9px" }}>
+            <Col>
+              <EqualButton
+                equalIsClicked={equalIsClicked}
+                n2={n2}
+                result={result}
+                setEqualIsClicked={setEqualIsClicked}
+              />
+            </Col>
+
+            <Col>
+              <ClearButton
+                equalIsClicked={equalIsClicked}
+                n1={n1}
+                n2={n2}
+                operator={operator}
+                operatorIsClicked={operatorIsClicked}
+                result={result}
+                setEqualIsClicked={setEqualIsClicked}
+                setN1={setN1}
+                setN2={setN2}
+                setOperator={setOperator}
+                setOperatorIsClicked={setOperatorIsClicked}
+                setResult={setResult}
+              />
+            </Col>
+          </Row>
+        </Col>
+
+        <Col>
+          {operatorButtonsList.map((operatorButton) => (
+            <Row style={{ margin: "9px" }}>{operatorButton}</Row>
+          ))}
+        </Col>
+      </Row>
+    </Container>
   );
 }
 
-root.render(<App></App>);
+createRoot(document.getElementById("app")).render(<App></App>);

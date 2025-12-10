@@ -1,3 +1,5 @@
+/* Component imports */
+import MainButton from "./main-button.component";
 /* React imports */
 import { Dispatch, SetStateAction } from "react";
 
@@ -17,13 +19,37 @@ export default function NumberButton(props: ComponentProps) {
 
   if (!props.operatorIsClicked) {
     if (props.buttonNumber === "0" && !props.n1) {
-      return <button disabled>{props.buttonNumber}</button>;
+      return (
+        <MainButton
+          buttonText={props.buttonNumber}
+          disabled={true}
+          variant="primary"
+        />
+      );
     }
-    return <button onClick={updateN1}>{props.buttonNumber}</button>;
+    return (
+      <MainButton
+        buttonText={props.buttonNumber}
+        onClick={updateN1}
+        variant="primary"
+      />
+    );
   }
 
   if (props.buttonNumber === "0" && !props.n2) {
-    return <button disabled>{props.buttonNumber}</button>;
+    return (
+      <MainButton
+        buttonText={props.buttonNumber}
+        disabled={true}
+        variant="primary"
+      />
+    );
   }
-  return <button onClick={updateN2}>{props.buttonNumber}</button>;
+  return (
+    <MainButton
+      buttonText={props.buttonNumber}
+      onClick={updateN2}
+      variant="primary"
+    />
+  );
 }
